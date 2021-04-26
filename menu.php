@@ -15,7 +15,7 @@
 <div class="wrraper">
     
 <div class="barre text-aligne">
-<div class="im"><img src="logo.png"></div>
+<div class="im"><a href="index.php"><img src="logo.png"></div></a>
 <a href="index.php"> <i class="fas fa-home"></i></a>
 <a href="Admin.php"> <h3>Admin </h3> </a>
 <a href="Category.php"> <h3>Category </h3> </a>

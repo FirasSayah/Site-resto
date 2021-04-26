@@ -1,17 +1,20 @@
 <?php include("menu.php"); 
+include("connexion.php");
 session_start();
 ?>
-<div class="ad-admin">
+<div style="background-color:#d2dae2;">
     <div class="wrraper">
-        <h3 class="text-center"> Add Admin </h3>
-        <?php 
-           if(isset($_SESSION['add'])){
-          echo $_SESSION['add'];
-            unset($_SESSION['add']);
-}
+        <h3 class="text-center"> Update your account</h3>
+
+<?php  
+$id =$_GET['id'];
+$sql="SELECT * FROM tbl_admin WHERE id=$id";
+$res=mysqli_query($conn,$sql);
+
 ?>
+ 
  <br><br>
-        <form action=""method="post">
+        <form action="" method="POST">
             <table class="tbl-3">
              <tr>
                  <td> Full Name : </td>
@@ -28,7 +31,7 @@ session_start();
              </tr>
              <tr>
                  <td colospan="2"> 
-                     <input type="submit" name="submit" value="Add" class="btnb">
+                     <input type="submit" name="submit" value="Update" class="btnd">
                  </td>
              </tr>
                
@@ -51,23 +54,17 @@ if(isset($_POST['submit'])){
      $Full_Name=$_POST['Full_Name'];
      $username=$_POST['Username'];
      $Password=$_POST['Password'];
-     $sql="INSERT INTO tbl_admin (full_name,username,password) VALUES ('$Full_Name','$username','$Password')";
+     
+     $sql="UPDATE tbl_admin SET full_name='$Full_Name',username='$username',Password= '$Password' 
+     WHERE id=$id";
      $res=mysqli_query($conn, $sql);
 
-     if ($res) {
-        if( $Full_Name=='' or $username=='' or $Password=='' ){
-              $_SESSION['add'] ="Admin not Adding";
-              header("location: add-admin.php");
+     if($res){
+         $_SESSION['up'] ="Update success";
+         header("location: admin.php");
+     }
 
-        }
-        else{
-            $_SESSION['add'] ="Admin Add succsffully";
-            header("location: admin.php");
-
-        }
-        
-       
-      }    
+      
 }
     
 
